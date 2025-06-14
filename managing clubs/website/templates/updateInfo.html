@@ -1,0 +1,91 @@
+
+
+{%extends 'base.html'%}
+
+
+{% block content %}
+
+<div class="container">
+{% if user.is_authenticated%}
+
+    <form method="POST" action="{% url 'updateInfo' pk %}">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label     class="form-label">Position</label>
+            <input type="text" name="position" class="form-control" >
+            <div id="emailHelp" class="form-text">Position value must be in (GK,CB,RB,LB,CM,LM,RM,LW,RW,CT,ST)</div>
+
+          </div>
+        <br>
+        <div class="mb-3">
+            <label    class="form-label">Foot</label>
+            <input type="text" name="foot" class="form-control" >
+            <div id="emailHelp" class="form-text">fOOT value must be in (L,R)</div>
+
+          </div>
+        <br>
+        <div class="mb-3">
+            <label   class="form-label">Height</label>
+            <input type="number" name="height" class="form-control" >
+          </div>
+
+          <br>
+
+          <div class="mb-3">
+            <label  class="form-label">Weight</label>
+            <input type="number"  name="weight" class="form-control" >
+          </div>
+
+          <br>
+          <div class="mb-3">
+            <label  class="form-label">Goals</label>
+            <input type="number"  name="goals" class="form-control" >
+          </div>
+
+          <br>
+          <div class="mb-3">
+            <label  class="form-label">Assists</label>
+            <input type="number"  name="assists" class="form-control" >
+          </div>
+
+           
+          <br>
+          <div class="mb-3">
+            <label  class="form-label">Matches</label>
+            <input type="number"  name="matches" class="form-control" >
+          </div>
+
+           
+          <br>
+          <div class="mb-3">
+            <label  class="form-label">Yellow Card</label>
+            <input type="number"  name="yellow_card" class="form-control" >
+          </div>
+
+          <br>
+          <div class="mb-3">
+            <label  class="form-label">Red Card</label>
+            <input type="number"  name="red_card" class="form-control" >
+          </div>
+
+
+        {% if form.errors %}
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			  Your Form Has Errors
+			  {% for field in form %}
+			  	{% if field.errors %}
+			  		{{ field.errors }}
+			  	{% endif %}
+			  {% endfor %}
+			  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		{% endif %}
+        
+      {{ form.as_p }}
+        <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+
+    {% endif%}
+  </div>
+    {%endblock%}

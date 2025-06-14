@@ -1,0 +1,73 @@
+
+
+{%extends 'base.html'%}
+
+
+{% block content %}
+
+<div class="container">
+{% if user.is_authenticated%}
+     
+<br>
+    <form method="POST" action="{% url 'updateWorker' pk %}">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label     class="form-label">Name</label>
+            <input   type="text" name="name" class="form-control" >
+          </div>
+        <br>
+        <div class="mb-3">
+            <label    class="form-label">Surname</label>
+            <input  type="text" name="surname" class="form-control" >
+          </div>
+
+          <br>
+          <div class="mb-3">
+              <label   class="form-label">OCCUPATION</label>
+              <input  type="text" name="occupation" class="form-control" >
+            </div>
+  
+        <br>
+        <div class="mb-3">
+            <label   class="form-label">SALARY</label>
+            <input  type="number" name="salary" class="form-control" >
+          </div>
+
+          <br>
+
+          <div class="mb-3">
+            <label   class="form-label">tel</label>
+            <input  type="number" name="tel" class="form-control" >
+          </div>
+
+          <br>
+
+          <div class="mb-3">
+            <label  class="form-label">Club ID</label>
+            <input  type="number"  name="club_id" class="form-control" >
+
+          </div>
+
+
+        {% if form.errors %}
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			  Your Form Has Errors
+			  {% for field in form %}
+			  	{% if field.errors %}
+			  		{{ field.errors }}
+			  	{% endif %}
+			  {% endfor %}
+			  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		{% endif %}
+        
+      {{ form.as_p }}
+        <button type="submit" class="btn btn-info">Add</button>
+    </form>
+    <br>
+    <br>
+
+    {% endif%}
+  </div>
+    {%endblock%}

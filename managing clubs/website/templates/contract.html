@@ -1,0 +1,69 @@
+{%extends 'base.html'%}
+
+{% block content %}
+
+
+{% if user.is_authenticated%}
+<br>
+<h2>Contract's table </h2>
+<br>
+<br>
+<td><a class="btn btn-success"  href="{% url 'addContract'     %}">Add Contract</a></td>
+<br>
+<br>
+<table class="table   table-striped table-hover">
+  <thead class=" table-dark">
+    <tr>
+
+      <th scope="col">#</th>
+      <th scope="col">Start Date</th>
+      <th scope="col">End Date</th>
+      <th scope="col"> Penal Clause  </th>
+      <th scope="col"> Salary   </th>
+      <th scope="col">Club ID</th>
+      <th scope="col">     </th>
+      <th scope="col">     </th>
+
+    </tr>
+  </thead>
+  <tbody>
+{% for contract in contracts %}
+<tr> 
+  <th scope="row">{{contract.player_id}}</th>
+  <td>{{contract.start_date}}</td>
+  <td>{{contract.end_date}}</td>
+  <td>{{contract.penal_clause}}</td>
+  <td>{{contract.salary}}</td>
+  <td>{{contract.club_id}}</td>
+  
+ 
+  <td><a class="btn btn-info"  href="{% url 'updateContract' contract.player_id  %}">Update</a></td>
+  <td><a class="btn btn-danger"  href="{% url 'delete'  contract.player_id 'contract' 'PLAYER_ID'  %}">Delete</a></td>
+
+  </td>
+</tr>
+{%endfor%}
+</tbody>
+</table>
+{% else %}
+<h2>Login</h2>
+<br>
+<form method="post" action="{%url 'home'%}">
+    {% csrf_token %}
+
+<form>
+    <div class="mb-3">
+      <input type="text" class="form-control" name="Username", placeholder="Username" required>
+    </div>
+    <br>
+    <div class="mb-3">
+      <input type="password" class="form-control" name="password" placeholder="Password" required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+</form>
+
+
+{% endif%}
+{%endblock%}
